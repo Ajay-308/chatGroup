@@ -54,8 +54,8 @@ const ChatRoom = () => {
     }
 
     return (
-        <div className="py-4 m-5 w-50 shadow bg-white text-dark border rounded container" >
-            <div className="text-center px-3 mb-4 text-capitalize">
+        <div className="container-fluid bg-dark bg-gradient text-dark d-flex align-items-center justify-content-center" >
+            <div className="py-4 m-5 w-50 shadow bg-white text-dark border border-warning border border-3 rounded container">
                 <h1 className="text-warning mb-4">{data?.room} Chat Room</h1>
             </div>
             <div className="bg-light border rounded p-3 mb-4" style={{ height: "500px", overflowY: "scroll" }}>
