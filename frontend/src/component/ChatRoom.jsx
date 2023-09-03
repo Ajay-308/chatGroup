@@ -17,7 +17,7 @@ const ChatRoom = () => {
     const [socket, setSocket] = useState()
 
     useEffect(() => {
-        const socket = io("http://localhost:9000")
+        const socket = io("https://chat2-zwko.onrender.com/")
         setSocket(socket)
 
         socket.on("connect", () => {
