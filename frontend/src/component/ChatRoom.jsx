@@ -17,7 +17,7 @@ const ChatRoom = () => {
     const [socket, setSocket] = useState()
 
     useEffect(() => {
-        const socket = io("https://chat-group-ajay-li3jbu3dz-ajay3008rock-gmailcom.vercel.app/")
+        const socket = io("https://back3-awmj.onrender.com/")
         setSocket(socket)
 
         socket.on("connect", () => {
