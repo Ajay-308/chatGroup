@@ -1,0 +1,31 @@
+version: "3"
+services:
+  front:
+    build:
+      context: "./frontend"
+      dockerfile: "Dockerfile"
+    ports:
+      - "4000:3000"
+    container_name: chat-conainter1
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - mern-stack-network
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - back
+  back:
+    build:
+      context: "./backend"
+      dockerfile: "Dockerfile"
+    ports:
+      - "9000:9000"
+    container_name: backend-container1
+    networks:
+      - mern-stack-network
+    volumes:
+      - ./backend:/app
+
+networks:
+  mern-stack-network:
