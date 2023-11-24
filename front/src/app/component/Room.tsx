@@ -26,7 +26,7 @@ const ChatRoom: React.FC = () => {
     const [socket, setSocket] = useState<Socket | undefined>();
 
     useEffect(() => {
-        const socketClient = io("http://localhost:9000");
+        const socketClient = io("https://back3-awmj.onrender.com/");
         setSocket(socketClient);
 
         socketClient.on("connect", () => {
