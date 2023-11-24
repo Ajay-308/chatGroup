@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MainForm = () => {
+interface FormData {
+    name: string;
+    room: string;
+}
+
+const MainForm: React.FC = () => {
     const navigate = useNavigate();
 
-    const [error, setError] = useState("");
-    const [data, setData] = useState({ name: "", room: "" });
+    const [error, setError] = useState < string > ("");
+    const [data, setData] = useState < FormData > ({ name: "", room: "" });
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setData({
             ...data,
             [e.target.name]: e.target.value,
         });
     };
 
-    const validation = () => {
+    const validation = (): boolean => {
         if (!data.name) {
             setError("Please enter your name.");
             return false;
@@ -27,7 +32,7 @@ const MainForm = () => {
         return true;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const isValid = validation();
         if (isValid) {
@@ -41,18 +46,19 @@ const MainForm = () => {
                 <div className="form-group mb-4">
                     <h2 className="text-warning mb-4">Welcome to Chatclub</h2>
                 </div>
-                <div className="form-group mb-4">
+                <div className="form-group mb-4 border border-blue-500 rounded-md">
                     <input
                         type="text"
-                        className="form-control bg-light"
+                        className="form-control bg-light border-none outline-none p-2"
                         name="name"
                         placeholder="Enter name"
                         onChange={handleChange}
                     />
                 </div>
-                <div className="form-group mb-4">
+
+                <div className="form-group border-blue-500  mb-4 ">
                     <select
-                        className="form-select bg-light"
+                        className="form-select bg-gray-600 bg-light"
                         name="room"
                         aria-label="Default select example"
                         onChange={handleChange}
@@ -63,7 +69,7 @@ const MainForm = () => {
                         <option value="socialMedia">Social Media</option>
                     </select>
                 </div>
-                <button type="submit" className="btn btn-warning w-100 mb-2">
+                <button type="submit" className="btn btn-warning bg-blue-600 w-100 mb-2">
                     Submit
                 </button>
                 {error && <small className="text-danger m-auto">{error}</small>}
