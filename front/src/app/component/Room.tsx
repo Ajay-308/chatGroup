@@ -85,7 +85,7 @@ const ChatRoom: React.FC = () => {
     };
     return (
 <div className="container-fluid bg-black bg-gradient text-dark min-h-screen flex flex-col items-center justify-center">
-  <div className="py-2 m-5 w-[13rem] shadow bg-white text-black border-warning  border-3 rounded">
+  <div className="py-2 m-5 w-[15rem] shadow bg-white text-black border-warning  border-3 rounded">
     <h1 className="text-warning mb-2 mx-4">{data?.room} Chat Room</h1>
   </div>
   <div className="bg-light border rounded p-3 w-[23rem] h-[35rem] mb-4 overflow-y-scroll">

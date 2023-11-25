@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 
 interface FormData {
@@ -22,13 +23,16 @@ const MainForm: React.FC = () => {
     const validation = (): boolean => {
         if (!data.name) {
             setError("Please enter your name.");
+            toast.error("Please enter your name.")
             return false;
         }
         if (!data.room) {
             setError("Please select a room.");
+            toast.error("Please select a room.")
             return false;
         }
         setError("");
+        
         return true;
     };
 
@@ -36,15 +40,19 @@ const MainForm: React.FC = () => {
         e.preventDefault();
         const isValid = validation();
         if (isValid) {
+            
             navigate(`/chat/${data.room}`, { state: data });
+            
         }
     };
 
     return (
+
         <div className="px-3 py-4 shadow bg-white text-dark border rounded row">
+        <Toaster/>
             <form onSubmit={handleSubmit}>
                 <div className="form-group mb-4">
-                    <h2 className="text-warning mb-4">Welcome to Chatclub</h2>
+                    <h2 className="text-warning mb-4 text-white">Welcome to Chatclub</h2>
                 </div>
                 <div className="form-group mb-4 border border-blue-500 rounded-md">
                     <input
@@ -69,7 +77,7 @@ const MainForm: React.FC = () => {
                         <option value="socialMedia">Social Media</option>
                     </select>
                 </div>
-                <button type="submit" className="btn btn-warning bg-blue-600 w-100 mb-2">
+                <button type="submit" className="btn btn-warning bg-blue-600 w-100 rounded-md w-24 mb-2">
                     Submit
                 </button>
                 {error && <small className="text-danger m-auto">{error}</small>}
