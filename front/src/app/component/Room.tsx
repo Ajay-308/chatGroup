@@ -37,7 +37,19 @@ const ChatRoom: React.FC = () => {
             socketClient.disconnect();
         };
     }, [location]);
-
+    const scrollToBottom = () => {
+        if (msgBoxRef.current) {
+            const scrollOptions: ScrollIntoViewOptions = {
+                behavior: 'smooth',
+                block: 'end',
+            };
+            msgBoxRef.current.lastElementChild?.scrollIntoView(scrollOptions);
+        }
+    };
+    
+    useEffect(() => {
+        scrollToBottom();
+    },[allMessages])
     useEffect(() => {
         if (socket) {
             socket.on("getLatestMessage", (newMessage: Message) => {
@@ -57,8 +69,10 @@ const ChatRoom: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setMsg(e.target.value);
     const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.keyCode === 13) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
             onSubmit();
+            scrollToBottom(); 
         }
     };
     const onSubmit = () => {
@@ -66,6 +80,7 @@ const ChatRoom: React.FC = () => {
             setLoading(true);
             const newMessage: Message = { time: new Date(), msg, name: data?.name || "" };
             socket.emit("newMessage", { newMessage, room: data?.room });
+            setMsg("")
         }
     };
     return (
