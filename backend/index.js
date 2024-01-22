@@ -17,7 +17,7 @@ var server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://vercel.com/ajay3008rock-gmailcom/chat-group-pxuj",
     methods: ["GET", "POST"],
   },
 });
